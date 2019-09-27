@@ -1,88 +1,75 @@
 from graph import *
 from math import *
 
-penSize(2)
-canvasSize(1200,800) # основа
-penColor(0,255,0)
-brushColor(0,245,0)
-rectangle(0,400,1200,800)
-penColor(200,230,255)
-brushColor(200,230,255)
-rectangle(0,0,1200,400)
+def fon(): 
+    canvasSize(1200, 800)         # drawing size
+    penColor(0 , 255 , 0)         # grass
+    brushColor(0 , 245, 0)
+    rectangle(0, 400, 1200, 800)
+    penColor(200 , 230, 255)      # sky
+    brushColor(200 , 230, 255)
+    rectangle(0, 0, 1200, 400)
 
+def tree(x, y, r, n):             # x, y - coordinates of the upper left corner of a rectangle 
+    penColor(0 , 0 , 0)           # with the (70*n; 100*n) dimensios described around the cloud
+    brushColor(0 , 0 , 0)         # n - parameter that sets the size of the tree
+    rectangle(x + 30 * n, y + 50 * n, x + 40 * n, y + 100 * n) 
+    brushColor(0 , 90 , 0)
+    circle(x + 35 * n, y + 15 * n, r * n) # r - radius
+    circle(x + 15 * n, y + 25 * n, r * n)
+    circle(x + 55 * n, y + 25 * n, r * n)
+    circle(x + 35 * n, y + 35 * n, r * n)
+    circle(x + 20 * n, y + 50 * n, r * n)
+    circle(x + 50 * n, y + 50 * n, r * n)
+  
+def house(x, y, n):               # n - parameter that sets the size of the house
+    penColor (0 , 0 , 0)          # x, y - coordinates of the upper left edge of the house 
+    brushColor(210 , 200 , 10) 
+    rectangle(x , y, x + 200 * n, y + 150 * n)
+    brushColor(255 , 100 , 100)
+    polygon([(x, y),(x + 200 * n, y),(x + 100 * n, y - 100 * n),(x, y)])
+    brushColor(150 , 150 , 255)
+    penColor(255 , 100 , 10)
+    rectangle(x + 50 * n, y + 50 * n, x + 150 * n, y + 100 * n)
 
-penColor(255,50,200)
-brushColor("yellow")  # сонце
-verts=[]
-t=0
-while t<241:
-    z_1=pi/120*t
-    z_2=pi/8*t
-    x=100+50*(1+0.05*sin(z_2))*cos(z_1)
-    y=100+50*(1+0.05*sin(z_2))*sin(z_1)
-    verts.append((x, y))  
-    t+=1
-polygon(verts)
+def cloud(x, y, r, n):            # n - parameter that sets the size of the cloud
+    penColor(0 , 0 , 0)           # x, y - coordinates of the upper left corner of a rectangle 
+    brushColor(255 , 255 , 255)   # with the (50*n; 30*n) dimensios described around the cloud
+    circle(x + 10 * n, y + 20 * n, r * n)
+    circle(x + 20 * n, y + 20 * n, r * n)                                                                                                                                                                                                                                                                                                                                                                                                                          
+    circle(x + 30 * n, y + 20 * n, r * n)
+    circle(x + 40 * n, y + 20 * n, r * n)
+    circle(x + 18 * n, y + 10 * n, r * n)
+    circle(x + 32 * n, y + 10 * n, r * n)
 
-penColor(0,0,0)
-brushColor(210,200,10) # дома 
-rectangle(150,450,400,600)
-brushColor(255,100,100)
-polygon([(150,450),(400,450),(275,300),(150,450)])
-brushColor(150,150,255)
-penColor(255,100,10)
-rectangle(225,485,325,550)
-penColor(0,0,0)
-brushColor(210,200,10) 
-rectangle(825,460,1000,575)
-brushColor(255,100,100)
-polygon([(825,460),(1000,460),(912,350),(825,460)])
-brushColor(150,150,255)
-penColor(255,100,10)
-rectangle(870,495,950,545)
+def sun(x_center, y_center, radius, wave_height, definition, N): # N - number of rays
+    brushColor("yellow")
+    penColor(255 , 100 , 10)
+    verts=[]
+    t=0
+    while t < ( 10 * N * definition + 1 ) :
+        z_1 = ( pi / ( N * definition )) * t
+        z_2 = ( pi / definition ) * t
+        x = x_center + radius * (1 + wave_height * sin( z_2 )) * cos( z_1 )
+        y = y_center + radius * (1 + wave_height * sin( z_2 )) * sin( z_1 )
+        verts.append(( x, y ))  
+        t += 1
+    polygon (verts)
 
-penColor(0,0,0)
-brushColor(255,255,255) # облака
-circle(300,150,50)
-circle(350,150,50)
-circle(410,150,50)
-circle(440,150,50)
-circle(400,130,50)
-circle(350,125,50)
-circle(900,200,50)
-circle(950,200,50)
-circle(1010,200,50)
-circle(1040,200,50)
-circle(1000,180,50)
-circle(950,175,50)
-circle(660,250,35)
-circle(685,250,35)
-circle(710,250,35)
-circle(740,250,35)
-circle(715,230,35)
-circle(675,230,35)
-
-penColor(0,0,0) # дерево
-brushColor(0,0,0)
-rectangle(575,300,600,590)
-brushColor(0,90,0)
-circle(590,300,45)
-circle(530,340,45)
-circle(650,340,45)
-circle(590,380,45)
-circle(540,420,45)
-circle(630,420,45)
-brushColor(0,0,0)
-rectangle(1075,400,1095,570)
-brushColor(0,90,0)
-circle(1090,360,35)
-circle(1125,400,35)
-circle(1055,400,35)
-circle(1055,400,35)
-circle(1090,410,35)
-circle(1120,450,35)
-circle(1055,450,35)
-
+   
+penSize( 2 )
+fon()
+sun(120, 110, 75, 0.07, 800, 22)
+cloud(250, 70, 15, 4)
+cloud(550, 130, 15, 3)
+cloud(850, 60, 15, 3.5)
+tree(415, 200, 15, 3.5)
+tree(1000, 230, 15, 2.2)
+house(100, 350, 1.5)
+house(700, 350, 1.2)
 run()
+
+
+
 
 
