@@ -1,5 +1,7 @@
-from graph import *
-from math import *
+from graph import canvasSize, run
+from graph import penColor, brushColor, penSize
+from graph import rectangle, circle, polygon
+from math import sin, cos, pi
 
 def fon(): 
     canvasSize(1200, 800)         # drawing size
@@ -68,8 +70,3 @@ tree(1000, 230, 15, 2.2)
 house(100, 350, 1.5)
 house(700, 350, 1.2)
 run()
-
-
-
-
-
